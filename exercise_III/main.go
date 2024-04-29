@@ -420,9 +420,12 @@ func (p pair) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func requestServer() {
-	resp, err := http.Get("http://localhost:8080")
+	resp, err := http.Get("https://github.com/asad-co")
 	fmt.Println(err)
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
-	fmt.Printf("\nWebserver said: `%s`", string(body))
+	// fmt.Printf("\nWebserver said: `%s`", string(body))
+	file, _ := os.Create("webOutput.txt")
+	fmt.Fprint(file, string(body))
+	file.Close()
 }
